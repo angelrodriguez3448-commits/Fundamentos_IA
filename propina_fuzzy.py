@@ -10,9 +10,9 @@ comida = int(input('Del 0 al 10, ¿Como estuvo la comida?'))
 #Crear variables linguisticas de entrada
 #Variable de servicio
 x_servicio = np.linspace(0, 10, 100)
-s_malo = fuzz.trimf(x_servicio, [0, 0, 5])
+s_malo = fuzz.trapmf(x_servicio, [0, 2, 3, 5])
 s_normal = fuzz.trimf(x_servicio, [2, 5, 8])
-s_bueno = fuzz.trimf(x_servicio, [5, 10, 10])
+s_bueno = fuzz.smf(x_servicio, 6, 9)
 
 #Variable de comida
 x_comida = np.linspace(0, 10, 100)
@@ -60,3 +60,32 @@ print(f'Propina por bisectriz: {propina_bisectriz:.5f}%')
 print(f'Propina por medio de maximos: {propina_medio:.5f}%')
 print(f'Propina por menor maximo: {propina_pequeño:.5f}%')
 print(f'Propina por mayor maximo: {propina_grande:.5f}%')
+
+#Visualizacion
+fig = plt.figure(figsize=(27, 10))
+
+plt.subplot(2, 3, 1)
+plt.title('Calidad del Servicio')
+plt.plot(x_servicio, s_malo, label='Malo', color='r')
+plt.plot(x_servicio, s_normal, label='Normal', color='y')
+plt.plot(x_servicio, s_bueno, label='Bueno', color='g')
+plt.legend(loc='upper left')
+plt.ylim([0, 1])
+
+plt.subplot(2, 3, 2)
+plt.title('Calidad de la Comida')
+plt.plot(x_comida, c_rancia, label='Rancia', color='r')
+plt.plot(x_comida, c_normal, label='Normal', color='y')
+plt.plot(x_comida, c_deliciosa, label='Deliciosa', color='g')
+plt.legend(loc='upper left')
+plt.ylim([0, 1])
+
+plt.subplot(2, 3, 3)
+plt.title('Nivel de Propina')
+plt.plot(x_propina, p_trabajador, label='Trabajador', color='r')
+plt.plot(x_propina, p_normal, label='Normal', color='y')
+plt.plot(x_propina, p_rico, label='Rico', color='g')
+plt.legend(loc='upper left')
+plt.ylim([0, 1])
+
+plt.show()
